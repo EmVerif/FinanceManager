@@ -1,0 +1,16 @@
+﻿<Window x:Class="FinanceManager.View.AddCodeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FinanceManager.View"
+        mc:Ignorable="d"
+        Title="Window1" Height="284.482" Width="395.258">
+    <Grid>
+        <Button x:Name="bu_Add" Content="セル追加" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.349,-0.221" Click="Bu_Add_Click"/>
+        <Button x:Name="bu_Delete" Content="選択削除" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.349,-0.221" Click="Bu_Delete_Click"/>
+        <ScrollViewer Margin="0,35,0,0">
+            <WrapPanel x:Name="wp_DisplayCodeRegion"/>
+        </ScrollViewer>
+    </Grid>
+</Window>

@@ -5,8 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinanceManager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="939.5">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,6,0,0" TextWrapping="Wrap" Text="開始日：" VerticalAlignment="Top"/>
+        <DatePicker x:Name="dp_From" HorizontalAlignment="Left" Margin="63,2,0,0" VerticalAlignment="Top" Width="97"/>
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="165,6,0,0" TextWrapping="Wrap" Text="終了日：" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.156"/>
+        <DatePicker x:Name="dp_To" HorizontalAlignment="Left" Margin="218,2,0,0" VerticalAlignment="Top" Width="97"/>
+        <TextBlock x:Name="tb_DisplayType" HorizontalAlignment="Left" Margin="320,6,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.475,-0.125" Height="16"><Run Text="証券コード："/></TextBlock>
+        <ComboBox x:Name="combo_Code" HorizontalAlignment="Left" Margin="386,2,0,0" VerticalAlignment="Top" Width="150" Height="24" SelectionChanged="Combo_Code_SelectionChanged"/>
+        <CheckBox x:Name="cb_DisplayType" Content="表示切替" HorizontalAlignment="Left" Margin="541,7,0,0" VerticalAlignment="Top" Click="Cb_DisplayType_Click"/>
+        <Button x:Name="bu_AddCode" Content="証券コード追加" VerticalAlignment="Top" RenderTransformOrigin="1.356,0.433" Margin="614,2,0,0" Height="24" Click="Bu_AddCode_Click" HorizontalAlignment="Left" Width="87"/>
+        <Button x:Name="bu_Get" Content="株情報取得" HorizontalAlignment="Right" Margin="0,2,72,0" Width="75" RenderTransformOrigin="-1.107,0.1" Click="Bu_Get_Click" Height="24" VerticalAlignment="Top"/>
+        <Button x:Name="bu_Save" Content="セーブ" Margin="0,2,152,0" VerticalAlignment="Top" RenderTransformOrigin="-0.787,0.4" Click="Bu_Save_Click" Height="24" HorizontalAlignment="Right" Width="42"/>
+        <TextBox x:Name="tb_Progress" Height="24" Margin="0,2,10,0" TextWrapping="Wrap" IsReadOnly="True" VerticalAlignment="Top" HorizontalAlignment="Right" Width="57"/>
+        <DataGrid x:Name="dataGrid" Margin="0,31,0,0" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn"/>
     </Grid>
 </Window>
