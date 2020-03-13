@@ -40,4 +40,30 @@ namespace FinanceManager.Model
             DayTradingInfosDict = new SerializableDictionary<DateTime, TradingInfo>();
         }
     }
+
+    public class AssetsInfo
+    {
+        public Decimal TotalAssets { get; set; }
+        public Decimal TotalProfit { get; set; }
+        public SerializableDictionary<string, AssetsInfoEachCode> AssetsInfoEachCodeDic { get; set; }
+
+        public AssetsInfo()
+        {
+            TotalAssets = 0;
+            TotalProfit = 0;
+            AssetsInfoEachCodeDic = new SerializableDictionary<string, AssetsInfoEachCode>();
+        }
+    }
+
+    public class AssetsInfoEachCode
+    {
+        public Decimal TotalAssets { get; set; }
+        public Decimal TotalProfit { get; set; }
+
+        public AssetsInfoEachCode()
+        {
+            TotalAssets = 0;
+            TotalProfit = 0;
+        }
+    }
 }

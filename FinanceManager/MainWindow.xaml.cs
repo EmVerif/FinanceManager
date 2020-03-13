@@ -28,7 +28,7 @@ namespace FinanceManager
 
             Binding binding = new Binding("AllCodeList");
             binding.Source = MainWindowVM.Instance;
-            binding.Mode = BindingMode.TwoWay;
+            binding.Mode = BindingMode.OneWay;
             combo_Code.SetBinding(ComboBox.ItemsSourceProperty, binding);
             combo_Code.SelectedIndex = 0;
 
@@ -44,12 +44,12 @@ namespace FinanceManager
 
             binding = new Binding("TradingInfos");
             binding.Source = MainWindowVM.Instance;
-            binding.Mode = BindingMode.TwoWay;
+            binding.Mode = BindingMode.OneWay;
             dataGrid.SetBinding(DataGrid.ItemsSourceProperty, binding);
 
             binding = new Binding("ProgressStr");
             binding.Source = MainWindowVM.Instance;
-            binding.Mode = BindingMode.TwoWay;
+            binding.Mode = BindingMode.OneWay;
             tb_Progress.SetBinding(TextBox.TextProperty, binding);
         }
 
@@ -71,9 +71,9 @@ namespace FinanceManager
             MessageBox.Show("OK");
         }
 
-        private void Bu_Get_Click(object sender, RoutedEventArgs e)
+        private async void Bu_Get_Click(object sender, RoutedEventArgs e)
         {
-            MainWindowVM.Instance.GetTodayInfo();
+            await MainWindowVM.Instance.GetTodayInfo();
             MessageBox.Show("OK");
             MainWindowVM.Instance.ProgressStr = "0%";
         }
@@ -117,6 +117,13 @@ namespace FinanceManager
                 tb_DisplayType.Text = "証券コード：";
             }
             combo_Code.SelectedIndex = idx;
+        }
+
+        private void Bu_Summary_Click(object sender, RoutedEventArgs e)
+        {
+            SummaryWindow summaryWindow = new SummaryWindow();
+
+            summaryWindow.ShowDialog();
         }
     }
 }

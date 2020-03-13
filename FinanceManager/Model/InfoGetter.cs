@@ -23,8 +23,8 @@ namespace FinanceManager.Model
 
             using (var client = new HttpClient())
             {
-                HttpResponseMessage result = await client.GetAsync(_BaseAddr + inCode).ConfigureAwait(false);
-                hpContent = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
+                HttpResponseMessage result = await client.GetAsync(_BaseAddr + inCode);
+                hpContent = await result.Content.ReadAsStringAsync();
             }
             return Analyze(hpContent, inCode);
         }

@@ -56,6 +56,38 @@ namespace FinanceManager.Model
                 return ret;
             }
         }
+        public AssetsInfo AssetsInfo
+        {
+            get
+            {
+                AssetsInfo ret = new AssetsInfo();
+
+                foreach (var code in AllCodeList)
+                {
+                    Decimal totalNum = 0;
+                    Decimal totalDeal = 0;
+                    AssetsInfoEachCode assetsInfoEachCode = new AssetsInfoEachCode();
+
+                    foreach (var date in _CodeInfoDict[code].DayTradingInfosDict.Keys)
+                    {
+                        totalNum += _CodeInfoDict[code].DayTradingInfosDict[date].BuyNum;
+                        totalNum -= _CodeInfoDict[code].DayTradingInfosDict[date].SellNum;
+                        totalDeal -= _CodeInfoDict[code].DayTradingInfosDict[date].TotalBuyPrice;
+                        totalDeal += _CodeInfoDict[code].DayTradingInfosDict[date].TotalSellPrice;
+                    }
+                    assetsInfoEachCode.TotalAssets = totalNum * _CodeInfoDict[code].DayTradingInfosDict[GetLastDay(code)].FinalPrice;
+                    assetsInfoEachCode.TotalProfit = totalDeal + assetsInfoEachCode.TotalAssets;
+                    if ((assetsInfoEachCode.TotalAssets != 0) || (assetsInfoEachCode.TotalProfit != 0))
+                    {
+                        ret.AssetsInfoEachCodeDic.Add(_CodeInfoDict[code].CompanyName + @"(" + code + @")", assetsInfoEachCode);
+                        ret.TotalAssets += assetsInfoEachCode.TotalAssets;
+                        ret.TotalProfit += assetsInfoEachCode.TotalProfit;
+                    }
+                }
+
+                return ret;
+            }
+        }
         public event EventHandler ProgressChanged;
 
         private SerializableDictionary<string, CodeInfo> _CodeInfoDict = new SerializableDictionary<string, CodeInfo>();
@@ -156,6 +188,11 @@ namespace FinanceManager.Model
             return dateTime;
         }
 
+        public string GetCompanyNameFromCode(string inCode)
+        {
+            return _CodeInfoDict[inCode].CompanyName;
+        }
+
         public string GetCodeFromCompanyName(string inCompanyName)
         {
             string ret = "";
@@ -216,7 +253,7 @@ namespace FinanceManager.Model
         }
 
         // 取引終了～取引開始までの間で実行されること前提のプログラム
-        public List<string> GetTodayInfo()
+        public async Task<List<string>> GetTodayInfo()
         {
             List<string> errMsgsList = new List<string>();
             double percentPerGet = 100.0 / _CodeInfoDict.Keys.Count;
@@ -226,23 +263,22 @@ namespace FinanceManager.Model
             {
                 try
                 {
-                    var financeInfoTask = InfoGetter.Instance.Get(code);
-                    financeInfoTask.Wait();
-                    var date = DateTime.Parse(financeInfoTask.Result.Date);
+                    var financeInfo = await InfoGetter.Instance.Get(code);
+                    var date = DateTime.Parse(financeInfo.Date);
 
                     if (!_CodeInfoDict[code].DayTradingInfosDict.ContainsKey(date))
                     {
                         var tradingInfo = new TradingInfo();
 
                         tradingInfo.DateStr = date.ToString("yyyy/MM/dd"); ;
-                        tradingInfo.FinalPrice = financeInfoTask.Result.Price;
+                        tradingInfo.FinalPrice = financeInfo.Price;
                         _CodeInfoDict[code].DayTradingInfosDict.Add(date, tradingInfo);
                     }
                     else
                     {
-                        _CodeInfoDict[code].DayTradingInfosDict[date].FinalPrice = financeInfoTask.Result.Price;
+                        _CodeInfoDict[code].DayTradingInfosDict[date].FinalPrice = financeInfo.Price;
                     }
-                    _CodeInfoDict[code].CompanyName = financeInfoTask.Result.CompanyName;
+                    _CodeInfoDict[code].CompanyName = financeInfo.CompanyName;
                 }
                 catch
                 {

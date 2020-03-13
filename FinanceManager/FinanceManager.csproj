@@ -57,8 +57,12 @@
     </ApplicationDefinition>
     <Compile Include="ViewModel\AddCodeWindowVM.cs" />
     <Compile Include="ViewModel\MainWindowVM.cs" />
+    <Compile Include="ViewModel\SummaryWindowVM.cs" />
     <Compile Include="View\AddCodeWindow.xaml.cs">
       <DependentUpon>AddCodeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SummaryWindow.xaml.cs">
+      <DependentUpon>SummaryWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="View\DisplayCode.xaml">
       <SubType>Designer</SubType>
@@ -85,6 +89,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\AddCodeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SummaryWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

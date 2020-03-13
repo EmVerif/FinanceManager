@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinanceManager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="939.5">
+        Title="MainWindow" Height="500" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -18,9 +18,10 @@
         <ComboBox x:Name="combo_Code" HorizontalAlignment="Left" Margin="386,2,0,0" VerticalAlignment="Top" Width="150" Height="24" SelectionChanged="Combo_Code_SelectionChanged"/>
         <CheckBox x:Name="cb_DisplayType" Content="表示切替" HorizontalAlignment="Left" Margin="541,7,0,0" VerticalAlignment="Top" Click="Cb_DisplayType_Click"/>
         <Button x:Name="bu_AddCode" Content="証券コード追加" VerticalAlignment="Top" RenderTransformOrigin="1.356,0.433" Margin="614,2,0,0" Height="24" Click="Bu_AddCode_Click" HorizontalAlignment="Left" Width="87"/>
-        <Button x:Name="bu_Get" Content="株情報取得" HorizontalAlignment="Right" Margin="0,2,72,0" Width="75" RenderTransformOrigin="-1.107,0.1" Click="Bu_Get_Click" Height="24" VerticalAlignment="Top"/>
-        <Button x:Name="bu_Save" Content="セーブ" Margin="0,2,152,0" VerticalAlignment="Top" RenderTransformOrigin="-0.787,0.4" Click="Bu_Save_Click" Height="24" HorizontalAlignment="Right" Width="42"/>
-        <TextBox x:Name="tb_Progress" Height="24" Margin="0,2,10,0" TextWrapping="Wrap" IsReadOnly="True" VerticalAlignment="Top" HorizontalAlignment="Right" Width="57"/>
-        <DataGrid x:Name="dataGrid" Margin="0,31,0,0" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn"/>
+        <Button x:Name="bu_Get" Content="株情報取得" HorizontalAlignment="Left" Margin="57,31,0,0" Width="75" RenderTransformOrigin="-1.107,0.1" Click="Bu_Get_Click" Height="24" VerticalAlignment="Top"/>
+        <Button x:Name="bu_Save" Content="セーブ" Margin="10,31,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.787,0.4" Click="Bu_Save_Click" Height="24" HorizontalAlignment="Left" Width="42"/>
+        <TextBox x:Name="tb_Progress" Height="24" Margin="137,31,0,0" TextWrapping="Wrap" IsReadOnly="True" VerticalAlignment="Top" HorizontalAlignment="Left" Width="57"/>
+        <Button x:Name="bu_Summary" Content="概要" HorizontalAlignment="Left" Margin="199,31,0,0" VerticalAlignment="Top" Width="43" Height="24" RenderTransformOrigin="0.5,0.5" Click="Bu_Summary_Click"/>
+        <DataGrid x:Name="dataGrid" Margin="0,60,0,0" AutoGeneratingColumn="DataGrid_AutoGeneratingColumn"/>
     </Grid>
 </Window>

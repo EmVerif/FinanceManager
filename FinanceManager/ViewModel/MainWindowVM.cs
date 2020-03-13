@@ -93,9 +93,6 @@ namespace FinanceManager.ViewModel
             {
                 return Database.Instance.GetInfoFromCode(Code, FromDate, ToDate);
             }
-            set
-            {
-            }
         }
         public Dictionary<string, string> TransToTitleDict = new Dictionary<string, string>()
         {
@@ -140,9 +137,10 @@ namespace FinanceManager.ViewModel
             }
         }
 
-        public void GetTodayInfo()
+        public async Task GetTodayInfo()
         {
-            Database.Instance.GetTodayInfo();
+            await Database.Instance.GetTodayInfo().ConfigureAwait(false);
+            OnPropertyChanged("AllTypeList");
             OnPropertyChanged("TradingInfos");
         }
 
